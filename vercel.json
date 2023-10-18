@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "scrummer/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "scrummer/wsgi.py"
+      }
+    ]
+}

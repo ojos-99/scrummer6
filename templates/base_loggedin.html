@@ -1,0 +1,31 @@
+{% load static %} {% load user_has_group %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Scrummer</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'css/main.css' %}"
+        />
+    </head>
+    <header>
+        <nav class="start">
+            <a href="{% url 'index' %}">Home</a>
+        </nav>
+        <nav class="end">
+            <span class="loggedin__user"
+                >Logged in as {{ request.user.username }}</span
+            >
+            {% if request.user|user_has_group:"ADMIN" %}
+            <a href="{% url 'admin:index' %}">Admin</a>
+            {% endif %}
+            <a href="/logout/">Logout</a>
+        </nav>
+    </header>
+    <body>
+        <div class="container">{% block content %} {% endblock content %}</div>
+    </body>
+</html>
